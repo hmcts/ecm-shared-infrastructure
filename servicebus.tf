@@ -71,21 +71,25 @@ resource "azurerm_key_vault_secret" "update_case_queue_max_delivery_count" {
 # endregion
 
 output "create_updates_queue_primary_listen_connection_string" {
-  value = module.create-updates-queue.primary_listen_connection_string
+  sensitive = true
+  value     = module.create-updates-queue.primary_listen_connection_string
 }
 
 output "create_updates_queue_primary_send_connection_string" {
-  value = module.create-updates-queue.primary_send_connection_string
+  sensitive = true
+  value     =module.create-updates-queue.primary_send_connection_string
 }
 
 output "update_case_queue_primary_listen_connection_string" {
-  value = module.update-case-queue.primary_listen_connection_string
+  sensitive = true
+  value     =module.update-case-queue.primary_listen_connection_string
 }
 
 output "update_case_queue_primary_send_connection_string" {
-  value = module.update-case-queue.primary_send_connection_string
+  sensitive = true
+  value     = module.update-case-queue.primary_send_connection_string
 }
 
 output "queue_max_delivery_count" {
-  value = var.queue_max_delivery_count
+  value     = var.queue_max_delivery_count
 }
