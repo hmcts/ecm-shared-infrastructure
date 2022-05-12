@@ -11,7 +11,7 @@ module "queue-namespace" {
 }
 
 module "create-updates-queue" {
-  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=DTSPO-6371_azurerm_upgrade"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
   name                = "create-updates"
   namespace_name      = module.queue-namespace.name
   resource_group_name = azurerm_resource_group.rg.name
@@ -23,7 +23,7 @@ module "create-updates-queue" {
 }
 
 module "update-case-queue" {
-  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=DTSPO-6371_azurerm_upgrade"
+  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
   name                = "update-case"
   namespace_name      = module.queue-namespace.name
   resource_group_name = azurerm_resource_group.rg.name
