@@ -17,6 +17,9 @@ locals {
     "Destroy Me"   = var.destroy_me
     "application"  = var.product
   }
+
+  localEnv = var.env == "preview" ? "aat" : var.env
+  s2sRG  = "rpe-service-auth-provider-${local.localEnv}"
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -25,14 +28,31 @@ resource "azurerm_resource_group" "rg" {
   tags     = merge(local.common_tags, tomap({"lastUpdated" = timestamp()}))
 }
 
-data "azurerm_postgresql_server" "ethos_postgres_database" {
-  name                = "ethos-postgres-db-${var.env}"
-  resource_group_name = "ethos-postgres-db-${var.env}"
+
+# S2S KEY VAULT DATA
+data "azurerm_key_vault" "s2s_key_vault" {
+  name                = "s2s-${local.localEnv}"
+  resource_group_name = local.s2sRG
 }
 
-resource "azurerm_key_vault_secret" "POSTGRES-USER" {
-  name         = "${var.component}-POSTGRES-USER"
-  value        = data.azurerm_postgresql_server.ethos_postgres_database.user_name
-  key_vault_id = module.key-vault.key_vault_id
+data "azurerm_key_vault_secret" "microservicekey_ethos_repl_service" {
+  name = "microservicekey-ethos-repl-service"
+  key_vault_id = data.azurerm_key_vault.s2s_key_vault.id
 }
 
+# ET COS KEy VAULT
+data "azurerm_key_vault" "et_cos_key_vault" {
+  name                = "et-cos-${local.localEnv}"
+  resource_group_name = "et-cos-${local.localEnv}"
+}
+
+data "azurerm_key_vault_secret" "et_cos_tornado" {
+  name = "tornado_access_key"
+  key_vault_id = data.azurerm_key_vault.et_cos_key_vault.id
+}
+
+resource "azurerm_key_vault_secret" "tornado_access_key" {
+  key_vault_id = data.azurerm_key_vault.et_cos_key_vault.id
+  name         = "tornado_access_key"
+  value        = data.azurerm_key_vault_secret.et_cos_tornado.value
+}
