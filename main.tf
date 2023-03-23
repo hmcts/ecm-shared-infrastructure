@@ -47,12 +47,12 @@ data "azurerm_key_vault" "et_cos_key_vault" {
 }
 
 data "azurerm_key_vault_secret" "et_cos_tornado" {
-  name = "tornado_access_key"
+  name = "tornado-access-key"
   key_vault_id = data.azurerm_key_vault.et_cos_key_vault.id
 }
 
 resource "azurerm_key_vault_secret" "tornado_access_key" {
   key_vault_id = data.azurerm_key_vault.et_cos_key_vault.id
-  name         = "tornado_access_key"
+  name         = "tornado-access-key"
   value        = data.azurerm_key_vault_secret.et_cos_tornado.value
 }
