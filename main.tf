@@ -16,7 +16,7 @@ locals {
     "Team Contact" = var.team_contact
     "Destroy Me"   = var.destroy_me
     "application"  = var.product
-    "expiresAfter" = var.expiresAfter
+    "businessArea" = var.businessArea
   }
 }
 
