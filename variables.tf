@@ -80,4 +80,5 @@ variable "businessArea" {
 }
 
 variable "builtFrom" {
+  default = "https://github.com/HMCTS/ecm-shared-infrastructure.git"
 }
