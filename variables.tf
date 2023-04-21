@@ -78,3 +78,7 @@ variable "aks_subscription_id" {}
 variable "businessArea" {
   default = "CFT"
 }
+
+variable "builtFrom" {
+  default = "https://github.com/HMCTS/ecm-shared-infrastructure.git"
+}
