@@ -18,6 +18,7 @@ locals {
     "Destroy Me"   = var.destroy_me
     "application"  = var.product
     "businessArea" = var.businessArea
+    "builtFrom" = var.builtFrom
   }
 }
 
