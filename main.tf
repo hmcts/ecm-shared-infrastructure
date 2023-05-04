@@ -10,12 +10,15 @@ provider "azurerm" {
 }
 
 locals {
+  tagEnv = var.env == "aat" ? "staging" : var.env
   common_tags = {
-    "environment"  = var.env
+    "environment"  = local.tagEnv
     "managedBy"    = var.team_name
     "Team Contact" = var.team_contact
     "Destroy Me"   = var.destroy_me
     "application"  = var.product
+    "businessArea" = var.businessArea
+    "builtFrom" = var.builtFrom
   }
 }
 
