@@ -11,3 +11,27 @@ module "servicebus-namespace-premium" {
   zone_redundant      = true
   sku                 = "Premium"
 }
+
+module "create-updates-queue-premium" {
+  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
+  name                = "create-updates-premium"
+  namespace_name      = module.servicebus-namespace-premium.name
+  resource_group_name = azurerm_resource_group.rg.name
+
+  requires_duplicate_detection            = "true"
+  duplicate_detection_history_time_window = "PT59M"
+  lock_duration                           = "PT5M"
+  max_delivery_count                      = var.queue_max_delivery_count
+}
+
+module "update-case-queue-premium" {
+  source              = "git@github.com:hmcts/terraform-module-servicebus-queue?ref=master"
+  name                = "update-case-premium"
+  namespace_name      = module.servicebus-namespace-premium.name
+  resource_group_name = azurerm_resource_group.rg.name
+
+  requires_duplicate_detection            = "true"
+  duplicate_detection_history_time_window = "PT59M"
+  lock_duration                           = "PT5M"
+  max_delivery_count                      = var.queue_max_delivery_count
+}
