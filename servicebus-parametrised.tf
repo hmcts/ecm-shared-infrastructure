@@ -67,6 +67,12 @@ resource "azurerm_key_vault_secret" "update_case_queue_send_conn_str" {
   key_vault_id = module.key-vault.key_vault_id
 }
 
+resource "azurerm_key_vault_secret" "update_case_queue_listen_conn_str" {
+  name         = "update-case-queue-listen-connection-string"
+  value        = module.ecm-update-case-queue.primary_listen_connection_string
+  key_vault_id = module.key-vault.key_vault_id
+}
+
 resource "azurerm_key_vault_secret" "update_case_queue_max_delivery_count" {
   name         = "update-case-queue-max-delivery-count"
   value        = var.queue_max_delivery_count
