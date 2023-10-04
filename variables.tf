@@ -82,3 +82,11 @@ variable "businessArea" {
 variable "builtFrom" {
   default = "https://github.com/HMCTS/ecm-shared-infrastructure.git"
 }
+
+variable "servicebus_sku" {
+  default = "Standard"
+}
+
+variable "servicebus_zone_redundant" {
+  default = false
+}
