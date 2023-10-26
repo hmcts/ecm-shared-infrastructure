@@ -5,8 +5,9 @@ provider "azurerm" {
 provider "azurerm" {
   features {}
   skip_provider_registration = true
-  alias                      = "private_endpoint"
+  alias                      = "cft_vnet"
   subscription_id            = var.aks_subscription_id
+  features {}
 }
 
 locals {
@@ -18,12 +19,12 @@ locals {
     "Destroy Me"   = var.destroy_me
     "application"  = var.product
     "businessArea" = var.businessArea
-    "builtFrom" = var.builtFrom
+    "builtFrom"    = var.builtFrom
   }
 }
 
 resource "azurerm_resource_group" "rg" {
   name     = "${var.product}-${var.env}"
   location = var.location
-  tags     = merge(local.common_tags, tomap({"lastUpdated" = timestamp()}))
+  tags     = merge(local.common_tags, tomap({ "lastUpdated" = timestamp() }))
 }
