@@ -19,25 +19,25 @@ module "postgres" {
 }
 
 resource "azurerm_key_vault_secret" "ecm_consumer_postgres_user_v15" {
-  name         = "ecm-consumer-postgres-user_v15"
+  name         = "ecm-consumer-postgres-user-v15"
   value        = module.postgres.username
   key_vault_id = module.key-vault.key_vault_id
 }
 
 resource "azurerm_key_vault_secret" "ecm_consumer_postgres_password_v15" {
-  name         = "ecm-consumer-postgres-password_v15"
+  name         = "ecm-consumer-postgres-password-v15"
   value        = module.postgres.password
   key_vault_id = module.key-vault.key_vault_id
 }
 
 resource "azurerm_key_vault_secret" "ecm_consumer_postgres_host_v15" {
-  name         = "ecm-consumer-postgres-host_v15"
+  name         = "ecm-consumer-postgres-host-v15"
   value        = module.postgres.fqdn
   key_vault_id = module.key-vault.key_vault_id
 }
 
 resource "azurerm_key_vault_secret" "ecm_consumer_postgres_port_v15" {
-  name         = "ecm-consumer-postgres-port_v15"
+  name         = "ecm-consumer-postgres-port-v15"
   value        = "5432"
   key_vault_id = module.key-vault.key_vault_id
 }
