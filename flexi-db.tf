@@ -5,6 +5,7 @@ module "postgres" {
   providers = {
     azurerm.postgres_network = azurerm.private_endpoint
   }
+  name          = "ecm-shared-postgres-v15"
   product       = var.product
   component     = var.component
   business_area = var.businessArea
