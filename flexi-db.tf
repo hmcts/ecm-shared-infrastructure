@@ -13,6 +13,9 @@ module "postgres" {
   pgsql_databases = [
     {
       name : "ecmconsumer"
+    },
+    {
+      name : "ethos"
     }
   ]
   pgsql_version        = "15"
