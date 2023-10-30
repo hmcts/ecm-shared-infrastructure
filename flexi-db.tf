@@ -12,35 +12,32 @@ module "postgres" {
   pgsql_databases = [
     {
       name : "ecmconsumer"
-    },
-    {
-      name : "ethos"
     }
   ]
   pgsql_version        = "15"
   admin_user_object_id = var.jenkins_AAD_objectId
 }
 
-resource "azurerm_key_vault_secret" "ecm_shared_postgres_user" {
-  name         = "ecm-shared-postgres-user"
+resource "azurerm_key_vault_secret" "ecm_consumer_postgres_user_v15" {
+  name         = "ecm-consumer-postgres-user_v15"
   value        = module.postgres.username
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "azurerm_key_vault_secret" "ecm_shared_postgres_password" {
-  name         = "ecm-shared-postgres-password"
+resource "azurerm_key_vault_secret" "ecm_consumer_postgres_password_v15" {
+  name         = "ecm-consumer-postgres-password_v15"
   value        = module.postgres.password
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "azurerm_key_vault_secret" "ecm_shared_postgres_host" {
-  name         = "ecm-shared-postgres-host"
+resource "azurerm_key_vault_secret" "ecm_consumer_postgres_host_v15" {
+  name         = "ecm-consumer-postgres-host_v15"
   value        = module.postgres.fqdn
   key_vault_id = module.key-vault.key_vault_id
 }
 
-resource "azurerm_key_vault_secret" "ecm_shared_postgres_port" {
-  name         = "ecm-shared-postgres-port"
+resource "azurerm_key_vault_secret" "ecm_consumer_postgres_port_v15" {
+  name         = "ecm-consumer-postgres-port_v15"
   value        = "5432"
   key_vault_id = module.key-vault.key_vault_id
 }

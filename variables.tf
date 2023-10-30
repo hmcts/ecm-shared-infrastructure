@@ -33,6 +33,7 @@ variable "common_tags" {
 }
 
 variable "component" {
+  default = "shared"
 }
 
 variable "location_api" {
