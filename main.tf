@@ -22,12 +22,12 @@ locals {
     "Destroy Me"   = var.destroy_me
     "application"  = var.product
     "businessArea" = var.businessArea
-    "builtFrom" = var.builtFrom
+    "builtFrom"    = var.builtFrom
   }
 }
 
 resource "azurerm_resource_group" "rg" {
   name     = "${var.product}-${var.env}"
   location = var.location
-  tags     = merge(local.common_tags, tomap({"lastUpdated" = timestamp()}))
+  tags     = merge(local.common_tags, tomap({ "lastUpdated" = timestamp() }))
 }
