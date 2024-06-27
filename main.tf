@@ -1,5 +1,9 @@
 provider "azurerm" {
-  features {}
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
 }
 
 provider "azurerm" {
@@ -10,7 +14,7 @@ provider "azurerm" {
 }
 
 locals {
-  tagEnv = var.env == "aat" ? "staging" : var.env
+  tagEnv = var.env == "aat" ? "staging" : var.env == "perftest" ? "testing" : var.env
   common_tags = {
     "environment"  = local.tagEnv
     "managedBy"    = var.team_name
