@@ -10,6 +10,12 @@ module "ecm-servicebus-namespace" {
   common_tags         = var.common_tags
   zone_redundant      = var.servicebus_zone_redundant
   sku                 = var.servicebus_sku
+
+  lifecycle {
+    ignore_changes = [
+        all
+    ]
+  }
 }
 
 module "ecm-create-updates-queue" {
@@ -25,6 +31,12 @@ module "ecm-create-updates-queue" {
   depends_on = [
     azurerm_resource_group.rg
   ]
+
+  lifecycle {
+    ignore_changes = [
+      all
+    ]
+  }
 }
 
 module "ecm-update-case-queue" {
@@ -40,6 +52,12 @@ module "ecm-update-case-queue" {
   depends_on = [
     azurerm_resource_group.rg
   ]
+
+  lifecycle {
+    ignore_changes = [
+      all
+    ]
+  }
 }
 
 # region connection strings and other shared queue information as Key Vault secrets
