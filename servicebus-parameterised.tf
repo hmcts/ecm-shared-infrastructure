@@ -12,9 +12,7 @@ module "ecm-servicebus-namespace" {
   sku                 = var.servicebus_sku
 
   lifecycle {
-    ignore_changes = [
-      all
-    ]
+    ignore_changes = all
   }
 }
 
@@ -33,9 +31,7 @@ module "ecm-create-updates-queue" {
   ]
 
   lifecycle {
-    ignore_changes = [
-      all
-    ]
+    ignore_changes = all
   }
 }
 
@@ -54,9 +50,7 @@ module "ecm-update-case-queue" {
   ]
 
   lifecycle {
-    ignore_changes = [
-      all
-    ]
+    ignore_changes = all
   }
 }
 
