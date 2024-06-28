@@ -13,7 +13,7 @@ module "ecm-servicebus-namespace" {
 
   lifecycle {
     ignore_changes = [
-        all
+      all
     ]
   }
 }
