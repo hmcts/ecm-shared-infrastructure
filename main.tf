@@ -1,5 +1,9 @@
 provider "azurerm" {
-  features {}
+  features {
+    resource_group {
+      prevent_deletion_if_contains_resources = false
+    }
+  }
 }
 
 provider "azurerm" {
@@ -10,7 +14,7 @@ provider "azurerm" {
 }
 
 locals {
-  tagEnv = var.env == "aat" ? "staging" : var.env
+  tagEnv = var.env == "aat" ? "staging" : var.env == "perftest" ? "testing" : var.env
   common_tags = {
     "environment"  = local.tagEnv
     "managedBy"    = var.team_name
@@ -18,12 +22,15 @@ locals {
     "Destroy Me"   = var.destroy_me
     "application"  = var.product
     "businessArea" = var.businessArea
-    "builtFrom" = var.builtFrom
+    "builtFrom"    = var.builtFrom
   }
 }
 
 resource "azurerm_resource_group" "rg" {
   name     = "${var.product}-${var.env}"
   location = var.location
-  tags     = merge(local.common_tags, tomap({"lastUpdated" = timestamp()}))
+  tags     = merge(local.common_tags, tomap({ "lastUpdated" = timestamp() }))
+  lifecycle {
+    ignore_changes = all
+  }
 }
