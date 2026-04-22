@@ -8,7 +8,6 @@ module "ecm-servicebus-namespace" {
   location            = var.location
   env                 = var.env
   common_tags         = var.common_tags
-  zone_redundant      = var.servicebus_zone_redundant
   sku                 = var.servicebus_sku
 }
 
