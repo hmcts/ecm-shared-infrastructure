@@ -14,7 +14,13 @@ provider "azurerm" {
 }
 
 locals {
-  tagEnv = var.env == "aat" ? "staging" : var.env == "perftest" ? "testing" : var.env
+  env_map = {
+    aat      = "staging"
+    perftest = "testing"
+    prod     = "production"
+  }
+
+  tagEnv = lookup(local.env_map, var.env, var.env)
   common_tags = {
     "environment"  = local.tagEnv
     "managedBy"    = var.team_name
