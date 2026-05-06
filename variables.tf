@@ -53,11 +53,6 @@ variable "application_type" {
   description = "Type of Application Insights (Web/Other)"
 }
 
-variable "queue_max_delivery_count" {
-  default     = "10"
-  description = "Queue message max delivery counter. Extracted to variable so it can be assigned to application environment."
-}
-
 variable "team_name" {
   description = "Team name"
   default     = "ECM Project"
@@ -81,8 +76,4 @@ variable "businessArea" {
 
 variable "builtFrom" {
   default = "https://github.com/HMCTS/ecm-shared-infrastructure.git"
-}
-
-variable "servicebus_sku" {
-  default = "Standard"
 }
